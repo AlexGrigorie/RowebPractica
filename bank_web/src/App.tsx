@@ -1,78 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ApiFetch from "./service/ApiCalls/request";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import logo from "./logo.svg";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { appendFile } from "fs";
+import Create from "./pages/Create";
+import NavBar from "./components/Navbar";
+import Edit from "./pages/Edit";
+import Delete from "./pages/Delete";
+import OperationTable from "./components/OperationTable";
 
-export enum OperationTabelDropDown {
-  Deposit = 'Deposit',
-  Withdrawal = 'Withdrawal',
-}
-
-interface DataTypeDeposit {
-  amount: number;
-  fromAddress: string;
-}
-
-interface DataTypeWithdrawls {
-  amount: number;
-  toAddress: string;
-  wasApprovedByUser2FA: boolean;
-}
-
-interface DataTypeTradeOrder {
-  amount: number;
-  tradeOrderType: {
-    name: string;
-  };
-}
-
-const columnsDeposit: ColumnsType<DataTypeDeposit> = [
-  {
-    title: "Amount",
-    dataIndex: "amount",
-    width: 150,
-  },
-  {
-    title: "From Address",
-    dataIndex: "fromAddress",
-  },
-];
-
-const columnsTradeOrders: ColumnsType<DataTypeTradeOrder> = [
-  {
-    title: "Amount",
-    dataIndex: "amount",
-    width: 150,
-  },
-  {
-    title: "Trade Order Type",
-    dataIndex: ["tradeOrderType", "name"],
-  },
-];
-
-const columnsWithdrawals: ColumnsType<DataTypeWithdrawls> = [
-  {
-    title: "Amount",
-    dataIndex: "amount",
-    width: 150,
-  },
-  {
-    title: "ToAddress",
-    dataIndex: "toAddress",
-  },
-  {
-    title: "2FA Confirmed",
-    dataIndex: "wasApprovedByUser2FA",
-    key: "isActive",
-    render: (isActive:any) => (isActive ? "True" : "False"),
-  },
-];
 // ======================================
 function App() {
-  const [data, setData] = useState<any>();
   const [options, setOptions] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Deposit");
 
@@ -97,72 +34,25 @@ function App() {
     fetchDropDown();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url = "";
-        switch (selectedValue) {
-          case "Deposit":
-            url = ApiFetch.fetchDeposits;
-            break;
-          case "Withdrawal":
-            url = ApiFetch.fetchWithdrawals;
-            break;
-          case "TradeOrder":
-            url = ApiFetch.fetchTradeOrder;
-            break;
-          default:
-            url = "";
-        }
-        if (url) {
-          const response = await fetch(url);
-          const json = await response.json();
-          setData(json);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [selectedValue]);
-
-  console.log("FETCH: ", data);
-  console.log("dp value is: ", selectedValue);
   return (
-    <div className="App">
-      <h1>Operation table</h1>
-      <select value={selectedValue} onChange={handleSelectDropDown}>
-        {options.map((option: any) => (
-          <option key={option.value} value={option.label}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-      <div className="Table-grid">
-        {selectedValue === OperationTabelDropDown.Deposit ? (
-          <Table
-            columns={columnsDeposit}
-            dataSource={data}
-            pagination={{ pageSize: 5 }}
-            scroll={{ y: 300 }}
-          />
-        ) : selectedValue === OperationTabelDropDown.Withdrawal ? (
-          <Table
-            columns={columnsWithdrawals}
-            dataSource={data}
-            pagination={{ pageSize: 5 }}
-            scroll={{ y: 300 }}
-          />
-        ) : (
-          <Table
-            columns={columnsTradeOrders}
-            dataSource={data}
-            pagination={{ pageSize: 5 }}
-            scroll={{ y: 300 }}
-          />
-        )}
-      </div>
-    </div>
+    <>
+      <NavBar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <OperationTable
+              selectedValue={selectedValue}
+              options={options}
+              handleSelectDropDown={handleSelectDropDown}
+            />
+          }
+        />
+        <Route path="/create-deposit" element={<Create />}></Route>
+        <Route path="/edit-deposit" element={<Edit />}></Route>
+        <Route path="/delete-deposit" element={<Delete />}></Route>
+      </Routes>
+    </>
   );
 }
 
