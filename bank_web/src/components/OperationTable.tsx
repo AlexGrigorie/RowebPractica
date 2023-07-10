@@ -6,8 +6,8 @@ import { ColumnsType } from "antd/es/table";
 export enum OperationTabelDropDown {
   Deposit = "Deposit",
   Withdrawal = "Withdrawal",
+  TradeOrder = "TradeOrder",
 }
-
 interface DataTypeDeposit {
   amount: number;
   fromAddress: string;
@@ -31,9 +31,6 @@ const columnsDeposit: ColumnsType<DataTypeDeposit> = [
     title: "Amount",
     dataIndex: "amount",
     width: 150,
-    defaultSortOrder: "ascend",
-    sortDirections: ["ascend", "descend"],
-    sorter: (a, b) => a.amount - b.amount,
   },
   {
     title: "From Address",
@@ -47,7 +44,7 @@ const columnsTradeOrders: ColumnsType<DataTypeTradeOrder> = [
     dataIndex: "amount",
     width: 150,
     defaultSortOrder: "ascend",
-    sortDirections: ["ascend", "descend"],
+    sortDirections: ["ascend", "descend", "ascend"],
     sorter: (a, b) => a.amount - b.amount,
   },
   {
@@ -61,9 +58,6 @@ const columnsWithdrawals: ColumnsType<DataTypeWithdrawls> = [
     title: "Amount",
     dataIndex: "amount",
     width: 150,
-    defaultSortOrder: "ascend",
-    sortDirections: ["ascend", "descend"],
-    sorter: (a, b) => a.amount - b.amount,
   },
   {
     title: "ToAddress",
@@ -93,13 +87,13 @@ function OperationTable({
       try {
         let url = "";
         switch (selectedValue) {
-          case "Deposit":
+          case OperationTabelDropDown.Deposit:
             url = ApiFetch.fetchDeposits;
             break;
-          case "Withdrawal":
+          case OperationTabelDropDown.Withdrawal:
             url = ApiFetch.fetchWithdrawals;
             break;
-          case "TradeOrder":
+          case OperationTabelDropDown.TradeOrder:
             url = ApiFetch.fetchTradeOrder;
             break;
           default:

@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
 using Bank.Entities;
 using Bank.Repository;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,7 @@ builder.Services.AddScoped<DepositRepository>();
 builder.Services.AddScoped<TradeOrderRepository>();
 builder.Services.AddScoped<WithdrawalRepository>();
 builder.Services.AddScoped<OperationTypeRepository>();
+builder.Services.AddScoped<CoinRepository>();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -26,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors(builder => 
+app.UseCors(builder =>
             builder.WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowCredentials()
