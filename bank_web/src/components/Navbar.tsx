@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+import CoinSubMenu from "./CoinSubMenu";
 
 const NavBar = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -13,12 +14,15 @@ const NavBar = () => {
     setIsHovered(false);
   };
   return (
-    <nav>
-      <ul>
+    <nav className="navbar">
+      <Link to="/" className="nav-link">
+        Home
+      </Link>
+      <div>
         <li
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="Navbar-deposit"
+          className="deposit-menu"
         >
           Deposit
           {isHovered && (
@@ -35,10 +39,8 @@ const NavBar = () => {
             </ul>
           )}
         </li>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
+      </div>
+      <CoinSubMenu />
     </nav>
   );
 };

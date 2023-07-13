@@ -1,0 +1,19 @@
+GetAll: https://localhost:7172/coin/getall
+GetById: https://localhost:7172/coin/getbyid?coinId=2
+CreateCoin: https://localhost:7172/coin/createcoin 
+{
+    "name": "DogeCoin",
+    "description": "Adasda coin"
+}
+{
+    "name": "Bitcoin",
+    "description": "Best coin"
+}
+
+DeleteCoin: https://localhost:7172/coin/deletecoin?coinId=2
+EditCoin: https://localhost:7172/coin/editcoin
+{
+    "id": 2,
+    "name": "AlexCoin",
+    "description": "ADASDSD"
+}

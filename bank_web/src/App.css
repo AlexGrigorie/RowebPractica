@@ -29,7 +29,6 @@
   margin: 0 auto;
 }
 
-
 .App-link {
   color: #61dafb;
 }
@@ -38,16 +37,132 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
-.Navbar-deposit {
+
+.navbar {
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-link {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  color: #555;
   cursor: pointer;
 }
-li {
-  list-style-type: none;
+
+h1 {
+  margin-bottom: 20px;
 }
-a {
+
+.Table-grid {
+  margin-top: 20px;
+}
+
+.nav-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.sub-menu {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  background-color: #f0f0f0;
+  padding: 10px;
+  z-index: 1;
+}
+
+.nav-dropdown:hover .sub-menu {
+  display: block;
+}
+
+.sub-menu li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.sub-menu li a {
+  color: #333;
   text-decoration: none;
+}
+
+.sub-menu li a:hover {
+  color: #555;
+}
+
+.deposit-menu {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.deposit-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.deposit-menu ul li {
+  margin: 0;
+  padding: 0;
+}
+
+.deposit-menu ul li a {
+  color: #555;
+  text-decoration: none;
+}
+
+.coin-container {
+  width: 80%;
+  margin: 20px;
+  text-align: center;
+}
+.coin-page {
+  display: flex;
+  justify-content: center;
+}
+
+.coin-table {
+  width: 80%;
+  margin: 20px 20px 20px 120px;
+  border-collapse: collapse;
+}
+
+.coin-table th,
+.coin-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.coin-table th {
+  background-color: #f2f2f2;
+}
+
+.coin-delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
 }

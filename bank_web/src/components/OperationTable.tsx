@@ -38,21 +38,6 @@ const columnsDeposit: ColumnsType<DataTypeDeposit> = [
   },
 ];
 
-const columnsTradeOrders: ColumnsType<DataTypeTradeOrder> = [
-  {
-    title: "Amount",
-    dataIndex: "amount",
-    width: 150,
-    defaultSortOrder: "ascend",
-    sortDirections: ["ascend", "descend", "ascend"],
-    sorter: (a, b) => a.amount - b.amount,
-  },
-  {
-    title: "Trade Order Type",
-    dataIndex: ["tradeOrderType", "name"],
-  },
-];
-
 const columnsWithdrawals: ColumnsType<DataTypeWithdrawls> = [
   {
     title: "Amount",
@@ -81,6 +66,31 @@ function OperationTable({
   handleSelectDropDown: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
   const [data, setData] = useState<any>();
+  const [sortOrder, setSortOrder] = useState<any>("ascend");
+  const handleSortChange = () => {
+    if (sortOrder === "ascend") {
+      setSortOrder("descend");
+    } else {
+      setSortOrder("ascend");
+    }
+  };
+  const columnsTradeOrders: ColumnsType<DataTypeTradeOrder> = [
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      width: 150,
+      sorter: (record1, record2) => record1.amount - record2.amount,
+      sortOrder: sortOrder === "ascend" ? "ascend" : "descend",
+      onHeaderCell: () => ({
+        onClick: handleSortChange,
+      }),
+      showSorterTooltip: false,
+    },
+    {
+      title: "Trade Order Type",
+      dataIndex: ["tradeOrderType", "name"],
+    },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {

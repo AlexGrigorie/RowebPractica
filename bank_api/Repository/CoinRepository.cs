@@ -25,7 +25,6 @@ namespace Bank.Repository
             var deleteCoin = _context.Coins.FirstOrDefault(dc => dc.Id == id);
             deleteCoin.Deleted = true;
 
-            _context.Coins.Add(deleteCoin);
             _context.SaveChanges();
         }
 
@@ -37,7 +36,6 @@ namespace Bank.Repository
             editedCoin.Description = coin.Description;
             editedCoin.Updated = DateTime.Now;
 
-            _context.Coins.Add(editedCoin);
             _context.SaveChanges();
             return editedCoin;
 
