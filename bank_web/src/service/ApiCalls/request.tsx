@@ -6,5 +6,8 @@ const requests = {
   fetchOperationTypes: `${api_url}/OperationType/GetAll`,
   fetchAllCoins: `${api_url}/coin/GetAll`,
   deleteCoin: (id: number) => `${api_url}/coin/deletecoin?coinId=${id}`,
+  fetchCoinById: (id: any) => `${api_url}/coin/getbyid?coinId=${id}`,
+  addCoin: `${api_url}/coin/createcoin`,
+  editCoin: () => `${api_url}/coin/editcoin`,
 };
 export default requests;

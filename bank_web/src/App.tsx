@@ -8,6 +8,8 @@ import Edit from "./pages/Edit";
 import Delete from "./pages/Delete";
 import OperationTable from "./components/OperationTable";
 import CoinsPage from "./pages/CoinsPage";
+import AddCoin from "./pages/AddCoin";
+import EditCoin from "./pages/EditCoin";
 
 // ======================================
 function App() {
@@ -53,8 +55,9 @@ function App() {
         <Route path="/edit-deposit" element={<Edit />}></Route>
         <Route path="/delete-deposit" element={<Delete />}></Route>
 
-        <Route path="/coin/create" element={<div>Create Page</div>} />
-        <Route path="/coin/edit" element={<div>Edit Page</div>} />
+        <Route path="/coin/create" element={<AddCoin />} />
+        <Route path="/coin/edit" element={<EditCoin />} />
+        <Route path="/editCoin/:id" element={<EditCoin />} />
         <Route path="/coin/delete" element={<div>Delete Page</div>} />
         <Route path="/coin/all" element={<CoinsPage />} />
       </Routes>

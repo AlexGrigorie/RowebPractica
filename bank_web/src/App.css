@@ -166,3 +166,11 @@ h1 {
   font-weight: bold;
   border-radius: 10px;
 }
+
+.active-item {
+  cursor: pointer;
+  background-color: blue;
+}
+.inactive-item {
+  cursor: pointer;
+}
