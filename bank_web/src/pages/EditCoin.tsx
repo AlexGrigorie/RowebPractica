@@ -10,6 +10,10 @@ const EditCoin = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    if (!token) {
+      navigate("/informative-message");
+    }
     const fetchData = async () => {
       try {
         const response = await fetch(ApiFetch.fetchCoinById(id));

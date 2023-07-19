@@ -15,5 +15,6 @@ namespace Bank.Entities
         public DbSet<TradeOrderType> TradeOrderTypes { get; set; }
         public DbSet<Withdrawal> Withdrawals { get; set; }
         public DbSet<Coin> Coins { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

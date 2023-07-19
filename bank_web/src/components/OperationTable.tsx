@@ -2,6 +2,7 @@ import { Table } from "antd";
 import { useEffect, useState } from "react";
 import ApiFetch from "../service/ApiCalls/request";
 import { ColumnsType } from "antd/es/table";
+import { useNavigate } from "react-router-dom";
 
 export enum OperationTabelDropDown {
   Deposit = "Deposit",
@@ -65,6 +66,7 @@ function OperationTable({
   options: any[];
   handleSelectDropDown: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
+  const navigate = useNavigate();
   const [data, setData] = useState<any>();
   const [sortOrder, setSortOrder] = useState<any>("ascend");
   const handleSortChange = () => {
@@ -93,6 +95,10 @@ function OperationTable({
   ];
 
   useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    if (!token) {
+      navigate("/informative-message");
+    }
     const fetchData = async () => {
       try {
         let url = "";

@@ -1,4 +1,5 @@
 const api_url = process.env.REACT_APP_API_URL;
+
 const requests = {
   fetchDeposits: `${api_url}/deposit/Get?operationTypeId=1`,
   fetchWithdrawals: `${api_url}/withdrawal/Get?operationTypeId=2`,
@@ -9,5 +10,8 @@ const requests = {
   fetchCoinById: (id: any) => `${api_url}/coin/getbyid?coinId=${id}`,
   addCoin: `${api_url}/coin/createcoin`,
   editCoin: () => `${api_url}/coin/editcoin`,
+  loginUser: `${api_url}/account/login`,
+  registerUser: `${api_url}/account/register`,
 };
+
 export default requests;

@@ -17,6 +17,7 @@ namespace Bank.Controllers
         }
 
         [HttpGet(Name = "GetAllCoins")]
+        //[Authorize]
         public IEnumerable<Coin> GetAll() { return _coinRepository.GetAll(); }
 
         [HttpGet(Name = "GetCoin")]

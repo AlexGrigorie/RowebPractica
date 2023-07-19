@@ -32,9 +32,6 @@ const CoinSubMenu = () => {
           <li>
             <Link to="/coin/edit">Edit</Link>
           </li>
-          <li>
-            <Link to="/coin/delete">Delete</Link>
-          </li>
         </ul>
       )}
     </div>

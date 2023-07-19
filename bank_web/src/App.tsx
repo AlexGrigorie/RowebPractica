@@ -10,11 +10,15 @@ import OperationTable from "./components/OperationTable";
 import CoinsPage from "./pages/CoinsPage";
 import AddCoin from "./pages/AddCoin";
 import EditCoin from "./pages/EditCoin";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Message from "./pages/Message";
 
 // ======================================
 function App() {
   const [options, setOptions] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Deposit");
+  const token = localStorage.getItem("userToken");
 
   const handleSelectDropDown = (event: any) => {
     setSelectedValue(event.target.value);
@@ -40,9 +44,28 @@ function App() {
   return (
     <>
       <NavBar />
+
       <Routes>
+        {!token && <Route path="/" element={<Login />} />}
+        {token && (
+          <Route
+            path="/"
+            element={
+              <>
+                <h1 className="text-center mt-5">Welcome back! 😀</h1>
+                <div className="d-flex justify-content-center">
+                  <img
+                    className="d-block"
+                    src="https://media.istockphoto.com/id/951412868/photo/bitcoin-on-white-background.jpg?s=170667a&w=0&k=20&c=c2GkxaBHUNiEasYTdyJA6YloVzafGwd5ToyLU2LZUWg="
+                    alt="logo"
+                  />
+                </div>
+              </>
+            }
+          />
+        )}
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <OperationTable
               selectedValue={selectedValue}
@@ -51,6 +74,7 @@ function App() {
             />
           }
         />
+        <Route path="/register" element={<Register />}></Route>
         <Route path="/create-deposit" element={<Create />}></Route>
         <Route path="/edit-deposit" element={<Edit />}></Route>
         <Route path="/delete-deposit" element={<Delete />}></Route>
@@ -58,8 +82,8 @@ function App() {
         <Route path="/coin/create" element={<AddCoin />} />
         <Route path="/coin/edit" element={<EditCoin />} />
         <Route path="/editCoin/:id" element={<EditCoin />} />
-        <Route path="/coin/delete" element={<div>Delete Page</div>} />
         <Route path="/coin/all" element={<CoinsPage />} />
+        <Route path="/informative-message" element={<Message />}></Route>
       </Routes>
     </>
   );

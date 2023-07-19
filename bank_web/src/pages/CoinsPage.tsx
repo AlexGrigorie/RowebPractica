@@ -30,6 +30,10 @@ const CoinsPage = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    if (!token) {
+      navigate("/informative-message");
+    }
     const fetchData = async () => {
       try {
         let url = ApiFetch.fetchAllCoins;
